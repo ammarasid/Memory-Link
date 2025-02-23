@@ -1,0 +1,104 @@
+from kivy.app import App
+from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.image import Image
+
+class MyImage(Image):
+	pass
+
+
+
+class MyLayout(BoxLayout):
+	def __init__(self, **kwargs):
+		super().__init__(**kwargs)
+		layout = FloatLayout(size_hint=(1,1))
+
+		self.image = MyImage(source ='holdingHand.jpeg', size_hint=(1, 1), allow_stretch=True, keep_ratio=False)
+		layout.add_widget(self.image)
+
+		self.faceButton = Button(size_hint = (0.1,0.1), pos_hint={'center_x':0.5, 'center_y': 0.6})
+		self.faceButton.bind(on_press=self.new_label)
+		layout.add_widget(self.faceButton)
+
+		self.image4 = MyImage(source ='faceId.png', size_hint=(.2, .2), pos_hint={'center_x':0.5, 'center_y': 0.6})
+		layout.add_widget(self.image4)
+
+		self.title = Label(text='Memory Link',size_hint = (.3,.1), pos_hint={'center_x':0.5, 'center_y': 0.9},font_size='40sp')
+		layout.add_widget(self.title)
+
+		self.patientlogin = Label(text='Patient Login',size_hint = (0.25,0.1), pos_hint={'center_x':0.5, 'center_y': 0.8},font_size='25sp')
+		layout.add_widget(self.patientlogin)
+
+		self.button1 = Button(text='Guardian Log In', size_hint = (0.3,0.1), pos_hint={'center_x':0.5, 'center_y': 0.35})
+		layout.add_widget(self.button1)
+
+		self.button2 = Button(text='Hospice Staff Log In', size_hint = (0.3,0.1), pos_hint={'center_x':0.5, 'center_y': 0.2})
+		layout.add_widget(self.button2)
+
+		#To change to patient screen
+
+		self.add_widget(layout)
+		self.layout = layout
+
+
+
+	def new_label(self,button):
+
+		#patient screen background
+
+		self.image2 = MyImage(source ='orangeBackground.jpg', size_hint=(1, 1), allow_stretch=True, keep_ratio=False)
+		self.layout.add_widget(self.image2)
+
+		self.image3 = MyImage(source ='whiteBackground.jpg', size_hint=(1,.8), allow_stretch=True, keep_ratio=False)
+		self.layout.add_widget(self.image3)
+
+		self.label = Label(text='CompanyCare', size_hint =(1,1), pos_hint={'center_x':0.5, 'center_y': 0.9}, font_size='40sp')
+		self.layout.add_widget(self.label)
+
+		
+		#patient screen
+
+		self.review = Button(text='Review Your Recent Visit',size_hint = (0.3,0.1), pos_hint={'center_x':0.5, 'center_y': 0.7})
+		self.layout.add_widget(self.review)
+
+		self.summary = Button(text='Visit Summary',size_hint = (0.3,0.1), pos_hint={'center_x':0.5, 'center_y': 0.55})
+		self.layout.add_widget(self.summary)
+
+		self.checklist = Button(text='Checklist',size_hint = (0.3,0.1), pos_hint={'center_x':0.5, 'center_y': 0.4})
+		self.layout.add_widget(self.checklist)
+
+		self.schedule = Button(text='Schedule',size_hint = (0.3,0.1), pos_hint={'center_x':0.17, 'center_y': 0.25})
+		self.layout.add_widget(self.schedule)
+
+		self.past = Button(text='Past Appointments',size_hint = (0.3,0.1), pos_hint={'center_x':0.5, 'center_y': 0.25})
+		self.layout.add_widget(self.past)
+
+		self.drugs = Button(text='Drugs',size_hint = (0.3,0.1), pos_hint={'center_x':0.83, 'center_y': 0.25})
+		self.layout.add_widget(self.drugs)
+
+		self.countdown = Button(text='Countdown to Next Appointment',size_hint = (0.3,0.1), pos_hint={'center_x':0.5, 'center_y': 0.1})
+		self.layout.add_widget(self.countdown)
+
+		self.learn = Button(text='Learn',size_hint = (0.3,0.1), pos_hint={'center_x':0.5, 'center_y': 0.7})
+		self.layout.add_widget(self.learn)
+
+		
+
+
+		self.layout.remove_widget(self.button1)
+		self.layout.remove_widget(self.image)
+		self.layout.remove_widget(self.title)
+		self.layout.remove_widget(self.patientlogin)
+
+
+class MyApp(App):
+	def build(self):
+		return MyLayout()
+
+
+
+
+if __name__ == '__main__':
+	MyApp().run()
